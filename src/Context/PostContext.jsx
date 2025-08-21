@@ -6,11 +6,12 @@ export let postContext = createContext(null);
 
 export default function PostContextProvider({ children }) {
     const [posts, setPosts] = useState([]);
-    
+    console.log("Posts from Post context:", posts);
+
     let headers = {
         token: localStorage.getItem("User Token"),
     };
-    
+
     async function getAllPosts() {
         try {
             let { data } = await axios.get(
@@ -38,6 +39,22 @@ export default function PostContextProvider({ children }) {
             console.log(error);
         }
     }
+    async function deleteSinglePost(postId) {
+        try {
+            let { data } = await axios.delete(
+                `https://linked-posts.routemisr.com/posts/${postId}`,
+                {
+                    headers,
+                }
+            );
+            toast.success("Post Deleted Successfully!");
+            console.log(data, "After Deleting a Post");
+            // return data.post;
+        } catch (error) {
+            console.log(error);
+            toast.error("Post didn't delete.");
+        }
+    }
 
     async function addComment(body) {
         try {
@@ -48,33 +65,30 @@ export default function PostContextProvider({ children }) {
                     headers,
                 }
             );
-            toast.success('Comment Added Successfully!')
+            toast.success("Comment Added Successfully!");
 
             // console.log(data, "add comment");
             return data.comments;
         } catch (error) {
             console.log(error);
-            toast.error("Comment didn't add.")
-
+            toast.error("Comment didn't add.");
         }
     }
 
     async function addSinglePost(formData) {
         try {
             const { data } = await axios.post(
-                'https://linked-posts.routemisr.com/posts',
+                "https://linked-posts.routemisr.com/posts",
                 formData,
-                { headers }
+                headers
             );
-            setPosts(prevPosts => [data.post, ...prevPosts]);
-            toast.success('Post Added Successfully!')
+            toast.success("Post Added Successfully!");
 
             console.log(data, "add post");
-            // return data.comments;
+            return data.post;
         } catch (error) {
             console.log(error);
-            toast.error("Post didn't add.")
-
+            toast.error("Post didn't add.");
         }
     }
 
@@ -97,7 +111,7 @@ export default function PostContextProvider({ children }) {
     async function getUserPosts(userId) {
         try {
             let { data } = await axios.get(
-                `https://linked-posts.routemisr.com/users/${userId}/posts?limit=2`,
+                `https://linked-posts.routemisr.com/users/${userId}/posts?limit=50`,
                 {
                     headers,
                 }
@@ -118,7 +132,7 @@ export default function PostContextProvider({ children }) {
                 getUserData,
                 addComment,
                 addSinglePost,
-                posts
+                deleteSinglePost,
             }}
         >
             {children}

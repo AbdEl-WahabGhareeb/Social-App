@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import styles from "./Userposts.module.css";
+import styles from "./UserPosts.module.css";
 import { postContext } from "../../Context/PostContext";
 import Loader from "../Loader/Loader";
-import PostCard from "./../PostCard/PostCard";
+import PostCard from "../PostCard/PostCard";
 import AddPost from "../AddPost/AddPost";
 
-export default function Userposts() {
+export default function UserPosts() {
     let { getUserData, getUserPosts } = useContext(postContext);
     const [userPosts, setUserPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

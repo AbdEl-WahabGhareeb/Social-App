@@ -10,7 +10,7 @@ export default function AddPost({ callback }) {
         let formData = new FormData();
         let body = e.target.body.value;
         let image = e.target.image.files[0];
-        formData.append("body", body);
+        formData.append("body", body); 
         formData.append("image", image);
         let response = await addSinglePost(formData);
         console.log(response, "response");

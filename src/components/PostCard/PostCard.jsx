@@ -8,13 +8,12 @@ export default function PostCard({ post }) {
     const [showComments, setShowComments] = useState(false);
     const [moreComments, setMoreComments] = useState(3);
     const [commentContent, setCommentContent] = useState("");
-    const [comments, setComments] = useState([])
-    let { addComment } = useContext(postContext);
+    const [comments, setComments] = useState([]);
+    let { addComment , deleteSinglePost } = useContext(postContext);
 
-    useEffect(()=> {
-        setComments(post.comments)
-    },[])
-
+    useEffect(() => {
+        setComments(post.comments);
+    }, []);
 
     async function handleAddComment(e) {
         e.preventDefault();
@@ -23,12 +22,19 @@ export default function PostCard({ post }) {
             post: post._id,
         });
         console.log(response, "add comment response");
-        setComments(response)
+        setComments(response);
+    }
+
+    async function DeletePost(postId){
+        let response = await deleteSinglePost(postId);
+        console.log(response , "delete post response");
+        
     }
 
     return (
-        <>
-            <div className="card bg-blue-950 shadow-md p-4 max-w-xl mx-auto my-6">
+        <> 
+            <div className="card bg-blue-950 shadow-md p-4 max-w-xl mx-auto my-6 relative">
+                <button onClick={()=> DeletePost(post?._id)} className="text-3xl text-white ms-auto px-4 py-3 cursor-pointer absolute top-0 right-2 hover:text-blue-400 transition-all">x</button>
                 <Link to={`/postDetails/${post?._id}`}>
                     <div className="flex items-center gap-3 mb-3">
                         <div className="avatar">
