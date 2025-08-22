@@ -5,3 +5,7 @@
     color: rgb(93, 93, 251);
     font-weight: 800; 
 }
+
+body{
+    min-height: 100vh;
+}

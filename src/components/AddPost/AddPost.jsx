@@ -18,10 +18,10 @@ export default function AddPost({ callback }) {
     }
     return (
         <>
-            <div className="flex flex-col gap-5 justify-center items-center">
+            <div className="flex flex-col gap-5 justify-center items-center contaianer mx-auto">
                 <form
                     onSubmit={(e) => handleAddPost(e)}
-                    className="flex flex-col w-1/2 gap-5 justify-center items-center"
+                    className="flex flex-col w-full md:w-1/2 px-12 md:px-20  gap-5 justify-center items-center"
                 >
                     <input
                         type="text"

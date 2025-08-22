@@ -4,12 +4,12 @@ import postImg from "../../assets/post-1.jpg";
 import { Link } from "react-router-dom";
 import { postContext } from "./../../Context/PostContext";
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, deletePost }) {
     const [showComments, setShowComments] = useState(false);
     const [moreComments, setMoreComments] = useState(3);
     const [commentContent, setCommentContent] = useState("");
     const [comments, setComments] = useState([]);
-    let { addComment , deleteSinglePost } = useContext(postContext);
+    let { addComment, deleteSinglePost } = useContext(postContext);
 
     useEffect(() => {
         setComments(post.comments);
@@ -25,16 +25,42 @@ export default function PostCard({ post }) {
         setComments(response);
     }
 
-    async function DeletePost(postId){
+    async function DeletePost(postId) {
         let response = await deleteSinglePost(postId);
-        console.log(response , "delete post response");
-        
+        console.log(response, "delete post response");
+        deletePost();
     }
 
     return (
-        <> 
+        <>
             <div className="card bg-blue-950 shadow-md p-4 max-w-xl mx-auto my-6 relative">
-                <button onClick={()=> DeletePost(post?._id)} className="text-3xl text-white ms-auto px-4 py-3 cursor-pointer absolute top-0 right-2 hover:text-blue-400 transition-all">x</button>
+                <button
+                    onClick={() =>
+                        document.getElementById("my_modal_1").showModal()
+                    }
+                    className="text-3xl text-white ms-auto px-4 py-3 cursor-pointer absolute top-0 right-2 hover:text-blue-400 transition-all"
+                >
+                    x
+                </button>
+
+                <dialog id="my_modal_1" className="modal">
+                    <div className="modal-box">
+                        <h3 className="font-bold text-lg">Delete Post</h3>
+                        <p className="py-4">
+                            Are you sure you want to delete this post?
+                        </p>
+                        <div className="modal-action">
+                            <form method="dialog"
+                            className="flex w-full justify-between"
+                            >
+                                {/* if there is a button in form, it will close the modal */}
+                                <button className="btn bg-green-800 hover:bg-green-400 ">Close</button>
+                                <button className="btn bg-red-800 hover:bg-red-400 " onClick={() => DeletePost(post._id)}>Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
+
                 <Link to={`/postDetails/${post?._id}`}>
                     <div className="flex items-center gap-3 mb-3">
                         <div className="avatar">

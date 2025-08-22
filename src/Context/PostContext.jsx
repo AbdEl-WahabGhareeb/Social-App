@@ -39,22 +39,6 @@ export default function PostContextProvider({ children }) {
             console.log(error);
         }
     }
-    async function deleteSinglePost(postId) {
-        try {
-            let { data } = await axios.delete(
-                `https://linked-posts.routemisr.com/posts/${postId}`,
-                {
-                    headers,
-                }
-            );
-            toast.success("Post Deleted Successfully!");
-            console.log(data, "After Deleting a Post");
-            // return data.post;
-        } catch (error) {
-            console.log(error);
-            toast.error("Post didn't delete.");
-        }
-    }
 
     async function addComment(body) {
         try {
@@ -80,7 +64,7 @@ export default function PostContextProvider({ children }) {
             const { data } = await axios.post(
                 "https://linked-posts.routemisr.com/posts",
                 formData,
-                headers
+                { headers }
             );
             toast.success("Post Added Successfully!");
 
@@ -120,6 +104,23 @@ export default function PostContextProvider({ children }) {
             return data.posts;
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    async function deleteSinglePost(postId) {
+        try {
+            let { data } = await axios.delete(
+                `https://linked-posts.routemisr.com/posts/${postId}`,
+                {
+                    headers,
+                }
+            );
+            toast.success("Post Deleted Successfully!");
+            console.log(data, "After Deleting a Post");
+            // return data.post;
+        } catch (error) {
+            console.log(error);
+            toast.error("Post didn't delete.");
         }
     }
 

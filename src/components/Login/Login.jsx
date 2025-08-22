@@ -44,13 +44,13 @@ export default function Login() {
     }
     return (
         <>
-            <div className="w-1/2 mx-auto shadow-2xl p-12 my-8">
+            <div className="md:w-full lg:w-1/2 mx-auto shadow-2xl p-12 my-8">
                 <h3 className="text-blue-600 text-2xl mb-4">Login Form</h3>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         {...register("email")}
-                        className="w-full px-3 my-2 border-2 rounded-2xl outline-0 p-2 placeholder:text-gray-400 border-gray-200 text-black "
+                        className="w-full px-3 text-white my-2 border-2 rounded-2xl outline-0 p-2 placeholder:text-gray-400 border-gray-200 "
                         placeholder="Type your email..."
                         type="email"
                     />
@@ -62,7 +62,7 @@ export default function Login() {
 
                     <input
                         {...register("password")}
-                        className="w-full px-3 my-2 border-2 rounded-2xl outline-0 p-2 placeholder:text-gray-400 border-gray-200 text-black "
+                        className="w-full px-3 text-white my-2 border-2 rounded-2xl outline-0 p-2 placeholder:text-gray-400 border-gray-200 "
                         placeholder="Type your password"
                         type="password"
                     />

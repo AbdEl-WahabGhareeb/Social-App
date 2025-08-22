@@ -24,7 +24,7 @@ export default function Navbar() {
     }
     return (
         <>
-            <div className="bg-blue-200 shadow-sm">
+            <div className="bg-blue-200 shadow-sm fixed top-0 left-0 right-0 z-50">
                 <div className="w-[80%] navbar mx-auto">
                     <div className="flex-1">
                         <Link

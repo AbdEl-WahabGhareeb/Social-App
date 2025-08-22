@@ -27,11 +27,11 @@ export default function Home() {
                 <Loader />
             ) : (
                 <>
-                    <h2 className="my-12 text-2xl font-bold text-center text-blue-500 ">
-                        Home
-                    </h2>
-                    <AddPost />
                     <div className="container mx-auto">
+                        <h2 className="mb-12 text-2xl font-bold text-center text-blue-500  ">
+                            Home
+                        </h2>
+                        <AddPost />
                         <div className="flex justify-center items-center">
                             <div className="w-full">
                                 {allPosts.map((post) => (

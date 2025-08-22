@@ -26,7 +26,7 @@ export default function UserPosts() {
         <>
             <>
                 <div className="container mx-auto">
-                    <h2 className="my-12 text-2xl font-bold text-center text-blue-500 ">
+                    <h2 className="mb-12 text-2xl font-bold text-center text-blue-500 ">
                         My Posts
                     </h2>
                     {isLoading ? (
@@ -37,7 +37,7 @@ export default function UserPosts() {
                             <div className="flex justify-center items-center">
                                 <div className="w-full">
                                     {userPosts.map((post) => (
-                                        <PostCard key={post._id} post={post} />
+                                        <PostCard deletePost={getUserId} key={post._id} post={post} />
                                     ))}
                                 </div>
                             </div>
