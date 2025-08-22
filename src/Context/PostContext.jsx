@@ -15,7 +15,7 @@ export default function PostContextProvider({ children }) {
     async function getAllPosts() {
         try {
             let { data } = await axios.get(
-                `https://linked-posts.routemisr.com/posts?limit=50`,
+                `https://linked-posts.routemisr.com/posts?limit=50&sort=-createdAt`,
                 { headers }
             );
             setPosts(data.posts);
